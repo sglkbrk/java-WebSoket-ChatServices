@@ -30,8 +30,8 @@ public class ChatMessageService {
     }
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
-        var chatId = chatRoomService.getChatId(senderId, recipientId, false);
-        var messages = repository.findByChatId(chatId);
+        String chatId = chatRoomService.getChatId(senderId, recipientId, false);
+        List<ChatMessage> messages = repository.findByChatId(chatId);
         if(messages.size() > 0) {
             deliveredChatMessage(senderId,recipientId);
         }

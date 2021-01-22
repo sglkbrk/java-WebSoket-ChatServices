@@ -10,8 +10,6 @@ services:
     ports:
       - 3306:3306
     restart: always
-    volumes:
-      - ./data:/var/lib/mysql
 
   blog-service:
     restart: always

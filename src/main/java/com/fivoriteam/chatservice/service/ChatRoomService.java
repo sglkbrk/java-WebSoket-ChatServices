@@ -14,7 +14,7 @@ public class ChatRoomService {
 
         ChatRoom chatRoom =  chatRoomRepository.findBySenderIdAndRecipientId(senderId, recipientId);
         if( createIfNotExist && chatRoom == null) {
-            var chatId = String.format("%s_%s", senderId, recipientId);
+            String chatId = String.format("%s_%s", senderId, recipientId);
             ChatRoom senderRecipient = new ChatRoom();
             senderRecipient.setChatId(chatId);
             senderRecipient.setSenderId(senderId);

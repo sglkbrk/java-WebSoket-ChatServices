@@ -23,7 +23,7 @@ public class ChatController {
 
     @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
-        var chatId = chatRoomService.getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
+        String chatId = chatRoomService.getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
         chatMessage.setChatId(chatId);
         ChatMessage saved = chatMessageService.save(chatMessage);
         messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(),"/queue/messages", chatMessage);
@@ -31,13 +31,13 @@ public class ChatController {
 
     @MessageMapping("/writingmessage")
     public void writingmessage(@Payload ChatProcess chatProcess) {
-        var chatId = chatRoomService.getChatId(chatProcess.getSenderId(), chatProcess.getRecipientId(), true);
+        String chatId = chatRoomService.getChatId(chatProcess.getSenderId(), chatProcess.getRecipientId(), true);
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/writing", chatProcess );
 
     }
     @MessageMapping("/seenmessage")
     public void seenmessage(@Payload ChatProcess chatProcess) {
-        var chatId = chatRoomService.getChatId(chatProcess.getSenderId(), chatProcess.getRecipientId(), true);
+        String chatId = chatRoomService.getChatId(chatProcess.getSenderId(), chatProcess.getRecipientId(), true);
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
 
     }
