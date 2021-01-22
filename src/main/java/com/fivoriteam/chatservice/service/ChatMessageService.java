@@ -4,10 +4,6 @@ import com.fivoriteam.chatservice.exception.ResourceNotFoundException;
 import com.fivoriteam.chatservice.model.ChatMessage;
 import com.fivoriteam.chatservice.repository.ChatMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +13,6 @@ import java.util.List;
 public class ChatMessageService {
     @Autowired private ChatMessageRepository repository;
     @Autowired private ChatRoomService chatRoomService;
-    @Autowired private MongoOperations mongoOperations;
 
     public ChatMessage save(ChatMessage chatMessage) {
         chatMessage.setStatus("1");
