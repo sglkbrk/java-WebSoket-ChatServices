@@ -12,7 +12,7 @@ services:
     restart: always
 
   chat-service:
-    build: /Dockerfile
+    build: ${WORKSPACE}/Dockerfile
     image: chat-service
     restart: always
     environment:
