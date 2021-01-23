@@ -34,7 +34,7 @@ public class ChatMessageService {
     }
 
     public ChatMessage getSinglemesaj(Long id) {
-        return repository.findAllByById(id);
+        return repository.findAllById(id);
     }
     public ResponseEntity<ChatMessage> seenChatMessage(String senderId, String recipientId) {
        List<ChatMessage>  chatMessages = repository.findAllBySenderIdAndRecipientIdAndStatus(senderId,recipientId,"2");
