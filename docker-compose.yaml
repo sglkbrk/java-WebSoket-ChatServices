@@ -18,7 +18,7 @@ services:
     image: chat-service
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://chat-db:3306/blog?useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://chat-db:3306/chatmessage?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ZgkLcbgJhKwjknT
     links:
