@@ -33,15 +33,8 @@ public class ChatMessageService {
         return messages;
     }
 
-    public ChatMessage findById(Long id) {
-        return repository
-                .findById(id)
-                .map(chatMessage -> {
-                    chatMessage.setStatus("2");
-                    return repository.save(chatMessage);
-                })
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("can't find message (" + id + ")"));
+    public ChatMessage getSinglemesaj(Long id) {
+        return repository.findAllByById(id);
     }
     public ResponseEntity<ChatMessage> seenChatMessage(String senderId, String recipientId) {
        List<ChatMessage>  chatMessages = repository.findAllBySenderIdAndRecipientIdAndStatus(senderId,recipientId,"2");
@@ -59,4 +52,5 @@ public class ChatMessageService {
         }
         repository.saveAll(chatMessages);
     }
+
 }

@@ -37,7 +37,8 @@ public class ChatController {
     }
     @MessageMapping("/seenmessage")
     public void seenmessage(@Payload ChatProcess chatProcess) {
-        String chatId = chatRoomService.getChatId(chatProcess.getSenderId(), chatProcess.getRecipientId(), true);
+        ChatMessage chatMessage = chatMessageService.getSinglemesaj(chatProcess.getMsgId());
+        chatMessage.setStatus("3");
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
 
     }
@@ -57,7 +58,7 @@ public class ChatController {
 
     @GetMapping("/messages/{id}")
     public ResponseEntity<?> findMessage ( @PathVariable long id) {
-        return ResponseEntity.ok(chatMessageService.findById(id));
+        return ResponseEntity.ok(chatMessageService.getSinglemesaj(id));
     }
     //    Mesaj Görüldü
     @GetMapping("/seenChatMessage/{senderId}/{recipientId}")
