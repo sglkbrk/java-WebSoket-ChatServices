@@ -12,7 +12,9 @@ services:
     restart: always
 
   chat-service:
-    build: ${WORKSPACE}/Dockerfile
+    build:
+      context: ${WORKSPACE}
+      dockerfile: Dockerfile
     image: chat-service
     restart: always
     environment:
