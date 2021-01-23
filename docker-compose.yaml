@@ -1,29 +1,44 @@
 version: '3'
 services:
-  blog-mysql:
-    container_name: blog-mysql
+  chat-db:
+    container_name: chat-db
     image: mysql/mysql-server:5.7
     environment:
-      MYSQL_DATABASE: blog
-      MYSQL_ROOT_PASSWORD: burak
+      MYSQL_DATABASE: chatmessage
+      MYSQL_ROOT_PASSWORD: ZgkLcbgJhKwjknT
       MYSQL_ROOT_HOST: '%'
     ports:
       - 3306:3306
     restart: always
 
-  blog-service:
+  chat-service:
+    build: /Dockerfile
+    image: chat-service
     restart: always
-    build: .
-    working_dir: "/app"
-    command: mvn clean spring-boot:run
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://blog-mysql:3306/blog?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: burak
-    depends_on:
-      - blog-mysql
+      SPRING_DATASOURCE_PASSWORD: ZgkLcbgJhKwjknT
+    links:
+      - chat-db
     ports:
       - 8080:8080
-    volumes:
-      - .:/app
-      - ~/.m2:/root/.m2
+
+
+
+#  blog-service:
+#    restart: always
+#    build: .
+#    working_dir: "/app"
+#    command: mvn clean spring-boot:run
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://blog-mysql:3306/blog?useSSL=false
+#      SPRING_DATASOURCE_USERNAME: root
+#      SPRING_DATASOURCE_PASSWORD: burak
+#    depends_on:
+#      - blog-mysql
+#    ports:
+#      - 8080:8080
+#    volumes:
+#      - .:/app
+#      - ~/.m2:/root/.m2
