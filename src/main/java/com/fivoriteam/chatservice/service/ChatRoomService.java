@@ -10,7 +10,7 @@ public class ChatRoomService {
 
     @Autowired private ChatRoomRepository chatRoomRepository;
 
-    public String getChatId1(String senderId, String recipientId, boolean createIfNotExist) {
+    public String getChatId(String senderId, String recipientId, boolean createIfNotExist) {
 
         ChatRoom chatRoom =  chatRoomRepository.findBySenderIdAndRecipientId(senderId, recipientId);
         if( createIfNotExist && chatRoom == null) {
@@ -30,7 +30,7 @@ public class ChatRoomService {
         else return "";
     }
 
-    public String getChatId(String senderId, String recipientId, boolean createIfNotExist) {
+    public String getChatId1(String senderId, String recipientId, boolean createIfNotExist) {
 
         ChatRoom toChatRoom =  chatRoomRepository.findBySenderIdAndRecipientId(senderId, recipientId);
         ChatRoom FromchatRoom =  chatRoomRepository.findBySenderIdAndRecipientId(recipientId, senderId);
