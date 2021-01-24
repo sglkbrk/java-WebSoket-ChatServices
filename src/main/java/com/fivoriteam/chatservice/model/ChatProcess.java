@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ChatProcess {
-    private Long msgId;
+    private String msgId;
     private String chatId;
     private String senderId;
     private String recipientId;
