@@ -40,7 +40,7 @@ public class ChatMessageService {
     }
 
     public ResponseEntity<?> setStatusChatMessage(String senderId, String recipientId,String status) {
-        Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId));
+        Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId).and("status").in("1","2"));
         Update update = Update.update("status", status);
         mongoOperations.updateMulti(query, update, ChatMessage.class);
         return ResponseEntity.ok().build();

@@ -41,11 +41,9 @@ public class ChatController {
     @MessageMapping("/seenmessage")
     public void seenmessage(@Payload ChatProcess chatProcess) {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
-        ChatMessage chatMessage = chatMessageService.getSinglemesaj(chatProcess.getMsgId());
-        chatMessage.setStatus("3");
-        chatMessageService.save(chatMessage);
+        chatMessageService.setStatusChatMessage(chatProcess.getRecipientId(), chatProcess.getSenderId(),"3");
     }
-    
+
 
     @GetMapping("/messages/{senderId}/{recipientId}/count")
     public ResponseEntity<Long> countNewMessages(
@@ -62,10 +60,5 @@ public class ChatController {
     @GetMapping("/messages/{id}")
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
         return ResponseEntity.ok(chatMessageService.getSinglemesaj(id));
-    }
-    //    Mesaj Görüldü
-    @GetMapping("/seenChatMessage/{senderId}/{recipientId}")
-    public ResponseEntity<?> seenChatMessage ( @PathVariable String senderId, @PathVariable String recipientId) {
-        return chatMessageService.setStatusChatMessage(senderId, recipientId,"3");
     }
 }

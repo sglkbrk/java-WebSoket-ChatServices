@@ -1,10 +1,12 @@
 package com.fivoriteam.chatservice.model;
 
+import com.mongodb.annotations.NotThreadSafe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 

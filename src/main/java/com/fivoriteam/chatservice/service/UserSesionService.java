@@ -23,10 +23,12 @@ public class UserSesionService {
                     .date(new Date().toString()).build();
             userSesionRepository.save(userSession1);
         }else {
-            us.setSesionId(sessionId);
-            us.setStatus(status);
-            us.setDate(new Date().toString());
-            userSesionRepository.save(us);
+            if(sessionId != null){
+                us.setSesionId(sessionId);
+                us.setStatus(status);
+                us.setDate(new Date().toString());
+                userSesionRepository.save(us);
+            }
         }
     }
 
