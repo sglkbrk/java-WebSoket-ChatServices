@@ -3,6 +3,10 @@ package com.fivoriteam.chatservice.service;
 import com.fivoriteam.chatservice.model.ChatMessage;
 import com.fivoriteam.chatservice.repository.ChatMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +16,7 @@ import java.util.List;
 public class ChatMessageService {
     @Autowired private ChatMessageRepository repository;
     @Autowired private ChatRoomService chatRoomService;
+    @Autowired private MongoOperations mongoOperations;
 
     public ChatMessage save(ChatMessage chatMessage) {
         return  repository.save(chatMessage);
@@ -24,29 +29,17 @@ public class ChatMessageService {
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
         String chatId = chatRoomService.getChatId(senderId, recipientId, false);
         List<ChatMessage> messages = repository.findByChatId(chatId);
-        if(messages.size() > 0) {
-//            deliveredChatMessage(senderId,recipientId);
-        }
         return messages;
     }
+
     public ChatMessage getSinglemesaj(String id) {
         return repository.findAllById(id);
     }
-    public ResponseEntity<?> seenChatMessage(String senderId, String recipientId) {
-       List<ChatMessage>  chatMessages = repository.findAllBySenderIdAndRecipientIdAndStatus(senderId,recipientId,"2");
-        for (ChatMessage chatMessage : chatMessages) {
-            chatMessage.setStatus("3");
-        }
-        repository.saveAll(chatMessages);
+
+    public ResponseEntity<?> setStatusChatMessage(String senderId, String recipientId,String status) {
+        Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId));
+        Update update = Update.update("status", status);
+        mongoOperations.updateMulti(query, update, ChatMessage.class);
         return ResponseEntity.ok().build();
     }
-
-    public void deliveredChatMessage(String senderId, String recipientId) {
-        List<ChatMessage>  chatMessages = repository.findAllBySenderIdAndRecipientIdAndStatus(senderId,recipientId,"1");
-        for (ChatMessage chatMessage : chatMessages) {
-            chatMessage.setStatus("2");
-        }
-        repository.saveAll(chatMessages);
-    }
-
 }

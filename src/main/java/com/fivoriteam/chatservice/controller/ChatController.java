@@ -65,6 +65,6 @@ public class ChatController {
     //    Mesaj Görüldü
     @GetMapping("/seenChatMessage/{senderId}/{recipientId}")
     public ResponseEntity<?> seenChatMessage ( @PathVariable String senderId, @PathVariable String recipientId) {
-        return chatMessageService.seenChatMessage(senderId, recipientId);
+        return chatMessageService.setStatusChatMessage(senderId, recipientId,"3");
     }
 }
