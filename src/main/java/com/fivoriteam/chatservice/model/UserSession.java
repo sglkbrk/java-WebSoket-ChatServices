@@ -5,15 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatProcess {
+@Builder
+@Document
+public class UserSession {
+    @Id
     private String id;
-    private String msgId;
-    private String chatId;
-    private String senderId;
-    private String recipientId;
-    private String processType ;
+    private String sesionId;
+    private String userId;
+    private String status;
+    private String date;
 }

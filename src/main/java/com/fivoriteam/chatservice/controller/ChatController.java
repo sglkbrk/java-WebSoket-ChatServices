@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+
+
 @Controller
 public class ChatController {
 
     @Autowired private SimpMessagingTemplate messagingTemplate;
     @Autowired private ChatMessageService chatMessageService;
     @Autowired private ChatRoomService chatRoomService;
-
 
     @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
@@ -30,11 +31,13 @@ public class ChatController {
         messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(),"/queue/messages", chatMessage);
     }
 
+
     @MessageMapping("/writingmessage")
     public void writingmessage(@Payload ChatProcess chatProcess) {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/writing", chatProcess );
 
     }
+
     @MessageMapping("/seenmessage")
     public void seenmessage(@Payload ChatProcess chatProcess) {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
