@@ -45,6 +45,7 @@ public class ChatController {
         chatMessage.setStatus("3");
         chatMessageService.save(chatMessage);
     }
+    
 
     @GetMapping("/messages/{senderId}/{recipientId}/count")
     public ResponseEntity<Long> countNewMessages(

@@ -22,6 +22,8 @@ public class ChatMessageService {
         return  repository.save(chatMessage);
     }
 
+
+
     public long countNewMessages(String senderId, String recipientId) {
         return repository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "1");
     }
@@ -29,6 +31,7 @@ public class ChatMessageService {
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
         String chatId = chatRoomService.getChatId(senderId, recipientId, false);
         List<ChatMessage> messages = repository.findByChatId(chatId);
+        if(messages.size() > 0 ) setStatusDelivered(senderId,recipientId,"2");
         return messages;
     }
 
@@ -41,5 +44,11 @@ public class ChatMessageService {
         Update update = Update.update("status", status);
         mongoOperations.updateMulti(query, update, ChatMessage.class);
         return ResponseEntity.ok().build();
+    }
+
+    public void setStatusDelivered(String senderId, String recipientId,String status) {
+        Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId).and("status").is("1"));
+        Update update = Update.update("status", status);
+        mongoOperations.updateMulti(query, update, ChatMessage.class);
     }
 }
