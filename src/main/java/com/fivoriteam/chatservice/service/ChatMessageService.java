@@ -22,10 +22,8 @@ public class ChatMessageService {
         return  repository.save(chatMessage);
     }
 
-
-
     public long countNewMessages(String senderId, String recipientId) {
-        return repository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "1");
+        return repository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "2");
     }
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
