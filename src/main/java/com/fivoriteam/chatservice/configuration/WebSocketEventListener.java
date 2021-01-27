@@ -1,6 +1,6 @@
 package com.fivoriteam.chatservice.configuration;
 
-import com.fivoriteam.chatservice.service.UserSesionService;
+import com.fivoriteam.chatservice.service.UserSessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 public class WebSocketEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
-    @Autowired private UserSesionService userSesionService;
+    @Autowired private UserSessionService userSesionService;
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;

@@ -9,11 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class UserSesionService {
+public class UserSessionService {
 
     @Autowired private UserSessionRepository userSesionRepository;
 
     public void uploadUserSession(String userId,String sessionId,String status){
+        if(userId == null) return;
         UserSession us =  userSesionRepository.findFirstByUserId(userId);
         if(us == null){
             UserSession userSession1 = UserSession.builder()
@@ -35,4 +36,9 @@ public class UserSesionService {
     public List<UserSession> getUserSession(List<String> userids){
         return userSesionRepository.findAllByUserIdIn(userids);
     }
+    public UserSession getSingleUserSession(String userid){
+        return userSesionRepository.findFirstByUserId(userid);
+    }
+
+
 }
