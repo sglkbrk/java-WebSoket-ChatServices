@@ -8,13 +8,12 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@ResponseBody
 @Controller
 public class SessionController {
 
@@ -27,6 +26,7 @@ public class SessionController {
         userSesionService.uploadUserSession(userSessionEntity.getUserId(),headerAccessor.getSessionId(),"1");
     }
 
+
     @PostMapping("/getUserSession")
     public List<UserSession> getUserSession (@RequestBody List<String> userIds) {
         return userSesionService.getUserSession(userIds);
@@ -35,5 +35,10 @@ public class SessionController {
     @GetMapping ("/getUserSession/{userId}")
     public UserSession getFilterUserSession (@PathVariable String userId) {
         return userSesionService.getSingleUserSession(userId);
+    }
+
+    @GetMapping ("/getAllUserSession}")
+    public  List<UserSession> getAllUserSession() {
+        return userSesionService.getAllUserSession ();
     }
 }

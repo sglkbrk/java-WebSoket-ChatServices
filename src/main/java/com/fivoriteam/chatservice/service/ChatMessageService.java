@@ -14,27 +14,27 @@ import java.util.List;
 
 @Service
 public class ChatMessageService {
-    @Autowired private ChatMessageRepository repository;
+    @Autowired private ChatMessageRepository chatMessageRepository;
     @Autowired private ChatRoomService chatRoomService;
     @Autowired private MongoOperations mongoOperations;
 
     public ChatMessage save(ChatMessage chatMessage) {
-        return  repository.save(chatMessage);
+        return  chatMessageRepository.save(chatMessage);
     }
 
     public long countNewMessages(String senderId, String recipientId) {
-        return repository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "2");
+        return chatMessageRepository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "2");
     }
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
         String chatId = chatRoomService.getChatId(senderId, recipientId, false);
-        List<ChatMessage> messages = repository.findByChatId(chatId);
+        List<ChatMessage> messages = chatMessageRepository.findByChatId(chatId);
         if(messages.size() > 0 ) setStatusDelivered(senderId,recipientId,"2");
         return messages;
     }
 
     public ChatMessage getSinglemesaj(String id) {
-        return repository.findAllById(id);
+        return chatMessageRepository.findAllById(id);
     }
 
     public ResponseEntity<?> setStatusChatMessage(String senderId, String recipientId,String status) {
@@ -49,4 +49,5 @@ public class ChatMessageService {
         Update update = Update.update("status", status);
         mongoOperations.updateMulti(query, update, ChatMessage.class);
     }
+
 }

@@ -40,5 +40,9 @@ public class UserSessionService {
         return userSesionRepository.findFirstByUserId(userid);
     }
 
+    public List<UserSession> getAllUserSession(){
+        return userSesionRepository.findAll();
+    }
+
 
 }

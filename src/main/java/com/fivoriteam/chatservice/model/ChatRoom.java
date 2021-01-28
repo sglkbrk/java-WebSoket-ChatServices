@@ -20,5 +20,7 @@ public class ChatRoom {
     private String senderId;
     private String recipientId;
     private String status;
+    private String type;
     private String enddate;
+    private ChatMessage lastMsg;
 }

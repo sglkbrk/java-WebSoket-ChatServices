@@ -41,7 +41,7 @@ public class ChatController {
     @MessageMapping("/seenmessage")
     public void seenmessage(@Payload ChatProcess chatProcess) {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
-        chatMessageService.setStatusChatMessage(chatProcess.getRecipientId(), chatProcess.getSenderId(),"3");
+        chatMessageService.setStatusChatMessage(chatProcess.getRecipientId(), chatProcess.getSenderId(),chatProcess.getProcessType());
     }
 
 
