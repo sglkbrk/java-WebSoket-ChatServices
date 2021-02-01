@@ -28,6 +28,7 @@ public class ChatMessage {
    private String status;
    private String type;
    private String fileurl;
+   private String filesize;
 }
 
 
