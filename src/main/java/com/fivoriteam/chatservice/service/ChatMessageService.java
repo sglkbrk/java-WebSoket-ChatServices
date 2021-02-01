@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ChatMessageService {
+public class    ChatMessageService {
     @Autowired private ChatMessageRepository chatMessageRepository;
     @Autowired private ChatRoomService chatRoomService;
     @Autowired private MongoOperations mongoOperations;
@@ -45,7 +45,7 @@ public class ChatMessageService {
     }
 
     public void setStatusDelivered(String senderId, String recipientId,String status) {
-        Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId).and("status").is("1"));
+        Query query = new Query(Criteria.where("senderId").is(recipientId).and("recipientId").is(senderId).and("status").is("1"));
         Update update = Update.update("status", status);
         mongoOperations.updateMulti(query, update, ChatMessage.class);
     }
