@@ -45,7 +45,10 @@ public class ChatRoomService {
 
         for (ChatRoom chatromm: chatRooms) {
             List<ChatMessage>  chatMessage = chatMessageRepository.findByChatId(chatromm.getChatId(),pageable);
-            if(chatMessage.size() > 0 )chatromm.setLastMsg(chatMessage.get(0));
+            if(chatMessage.size() > 0 ) {
+                chatromm.setLastMsg(chatMessage.get(0));
+                chatromm.setCount(chatMessageRepository.countBySenderIdAndRecipientIdAndStatusIsNot(chatromm.getSenderId(), chatromm.getRecipientId(), "3"));
+            }
         }
         return chatRooms;
     }

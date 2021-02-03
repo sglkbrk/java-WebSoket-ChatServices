@@ -23,7 +23,7 @@ public class    ChatMessageService {
     }
 
     public long countNewMessages(String senderId, String recipientId) {
-        return chatMessageRepository.countBySenderIdAndRecipientIdAndStatus(senderId, recipientId, "2");
+        return chatMessageRepository.countBySenderIdAndRecipientIdAndStatusIsNot(senderId, recipientId, "3");
     }
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {

@@ -22,5 +22,6 @@ public class ChatRoom {
     private String status;
     private String type;
     private String enddate;
+    private Long count;
     private ChatMessage lastMsg;
 }
