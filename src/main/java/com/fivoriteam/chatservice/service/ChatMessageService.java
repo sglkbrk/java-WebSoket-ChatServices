@@ -18,6 +18,7 @@ public class    ChatMessageService {
     @Autowired private ChatRoomService chatRoomService;
     @Autowired private MongoOperations mongoOperations;
 
+
     public ChatMessage save(ChatMessage chatMessage) {
         return  chatMessageRepository.save(chatMessage);
     }

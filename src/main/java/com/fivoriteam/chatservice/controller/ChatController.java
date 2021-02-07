@@ -5,6 +5,7 @@ import com.fivoriteam.chatservice.model.ChatProcess;
 import com.fivoriteam.chatservice.service.ChatMessageService;
 import com.fivoriteam.chatservice.service.ChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -22,6 +23,8 @@ public class ChatController {
     @Autowired private SimpMessagingTemplate messagingTemplate;
     @Autowired private ChatMessageService chatMessageService;
     @Autowired private ChatRoomService chatRoomService;
+
+
 
     @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {

@@ -32,5 +32,10 @@ server:
     min-response-size: 100
     mime-types: text/html, text/xml, text/plain, text/css, text/javascript, application/javascript, application/json
 
+mongodb.encrypt:
+  keys:
+    - version: 1
+      key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
+
 
 
