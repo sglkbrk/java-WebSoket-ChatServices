@@ -20,6 +20,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+
 import java.util.List;
 
 @Configuration
@@ -35,7 +36,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS().setClientLibraryUrl("https://cdn.bootcdn.net/ajax/libs/sockjs-client/1.5.0/sockjs.js");
+        registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS().setClientLibraryUrl("src/main/resources/sockjs.js");
     }
 
     @Override
