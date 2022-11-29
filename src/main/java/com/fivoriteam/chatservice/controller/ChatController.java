@@ -38,7 +38,6 @@ public class ChatController {
     @MessageMapping("/writingmessage")
     public void writingmessage(@Payload ChatProcess chatProcess) {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/writing", chatProcess );
-
     }
 
     @MessageMapping("/seenmessage")
@@ -46,7 +45,6 @@ public class ChatController {
         messagingTemplate.convertAndSendToUser(chatProcess.getRecipientId(),"/queue/seen", chatProcess );
         chatMessageService.setStatusChatMessage(chatProcess.getRecipientId(), chatProcess.getSenderId(),chatProcess.getProcessType());
     }
-
 
     @GetMapping("/messages/{senderId}/{recipientId}/count")
     public ResponseEntity<Long> countNewMessages(

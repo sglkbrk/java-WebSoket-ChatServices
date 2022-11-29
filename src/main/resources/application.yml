@@ -13,11 +13,8 @@
 spring:
   data:
     mongodb:
-      database: chatdb
-      port: 27018
-      host: localhost
-      username: chatdbuser
-      password: PSqPrvulabKbQzA6xTHK0kHvssdvgyEQxMkJoK0107CI7nTPVa
+      port: 27017
+      host: 34.159.95.236
 
 jpa:
   properties:

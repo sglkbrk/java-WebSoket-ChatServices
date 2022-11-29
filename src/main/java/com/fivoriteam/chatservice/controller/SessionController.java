@@ -26,6 +26,12 @@ public class SessionController {
         userSesionService.uploadUserSession(userSessionEntity.getUserId(),headerAccessor.getSessionId(),"1");
     }
 
+    @MessageMapping("/UpdateSessionUser") //for saving current user's location in memory
+    public void updateLocation(@Payload UserSessionEntity userSessionEntity, SimpMessageHeaderAccessor headerAccessor) {
+        headerAccessor.getSessionAttributes().put("userId", userSessionEntity.getUserId());
+        userSesionService.uploadUserSession(userSessionEntity.getUserId(),headerAccessor.getSessionId(),userSessionEntity.getStatus());
+    }
+
 
     @PostMapping("/getUserSession")
     public List<UserSession> getUserSession (@RequestBody List<String> userIds) {
