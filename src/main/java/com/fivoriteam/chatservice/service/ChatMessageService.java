@@ -38,6 +38,12 @@ public class    ChatMessageService {
         return chatMessageRepository.findAllById(id);
     }
 
+    public List<ChatMessage> findAllByRecipientId(String id) {
+        return chatMessageRepository.findAllByRecipientId(id);
+    }
+
+
+
     public ResponseEntity<?> setStatusChatMessage(String senderId, String recipientId,String status) {
         Query query = new Query(Criteria.where("senderId").is(senderId).and("recipientId").is(recipientId).and("status").in("1","2"));
         Update update = Update.update("status", status);

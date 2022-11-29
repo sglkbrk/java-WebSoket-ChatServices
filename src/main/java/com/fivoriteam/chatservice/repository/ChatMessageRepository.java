@@ -17,4 +17,6 @@ public interface ChatMessageRepository extends MongoRepository<ChatMessage, Stri
     ChatMessage findAllById(String id);
 
     List<ChatMessage>  findByChatId (String chatId, Pageable pageable);
+
+    List<ChatMessage>  findAllByRecipientId(String RecipientId);
 }
